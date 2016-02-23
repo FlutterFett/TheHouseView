@@ -1,1 +1,27 @@
 
+package com.neumont.csc150.TheHouse.view;
+
+import javax.swing.JFrame;
+
+
+public class Frame extends JFrame {
+	private static final long serialVersionUID = 1L;
+
+	private MainPanel mainPanel;
+	private JFrame frame;
+	
+	
+	public Frame(){
+		frame = new JFrame("The House");
+		mainPanel = new MainPanel();
+		mainPanel.initLauncher();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().add(mainPanel);
+		frame.setSize(800, 800);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+	}
+
+
+
+}
