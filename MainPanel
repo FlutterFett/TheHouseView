@@ -1,0 +1,118 @@
+package com.neumont.csc150.TheHouse.view;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class MainPanel extends JPanel implements ActionListener{
+	private static final long serialVersionUID = 1L;
+	private JTextField nameField;
+	private JFrame launcher;
+	private JPanel launchPanel;
+	private JButton newGame;
+	private JButton loadGame;
+	private JButton exitGame;
+
+	public MainPanel(){
+		this.setBackground(Color.BLACK);
+	}
+	
+	public void initMainPanel(JFrame frame, JPanel panel) {
+		initLauncher();
+	}
+	
+	public void initLauncher(){
+		launcher = new JFrame("Game Launcher");
+		launchPanel = new JPanel();
+		launchPanel.setBackground(Color.black);
+		nameField = new JTextField("Name...");
+		nameField.setHorizontalAlignment(JTextField.CENTER);
+		nameField.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				if(nameField.getText().trim().equals("Name...")){
+					nameField.setText("");
+				}else{
+					
+				}
+				
+			}
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				if(nameField.getText().trim().equals("")){
+					nameField.setText("Name...");
+				}else{
+					
+				}
+				
+			}
+			
+		});
+		JLabel label = new JLabel("The House"); 
+		newGame = new JButton("New Game");
+		loadGame = new JButton("Load Game");
+		exitGame = new JButton("Exit Game");
+		launcher.setDefaultCloseOperation(3);
+		launcher.setSize(300, 250);
+		launcher.setVisible(true);
+		GridLayout launcherMenu = new GridLayout(0,1);
+		launcher.getContentPane().add(launchPanel);
+		launchPanel.setLayout(launcherMenu);
+		launchPanel.add(label);
+		label.setHorizontalAlignment(JLabel.CENTER);
+		label.setForeground(Color.WHITE);
+		launchPanel.add(nameField);
+		launchPanel.add(newGame);
+		launchPanel.add(loadGame);
+		launchPanel.add(exitGame);
+		launcher.setLocationRelativeTo(null);
+		launcher.setAlwaysOnTop(true);
+		newGame.addActionListener(this);
+		
+		/*Action Listeners*/
+		exitGame.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JButton quitter = new JButton();
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+				int choice = JOptionPane.showConfirmDialog(launcher, "Are you sure you wish to quit? Any unsaved progress will be lost.", "Warning!!", dialogButton);
+				if(choice == JOptionPane.YES_OPTION){
+					System.exit(0);
+				}
+				
+			}
+					
+		});
+		
+	}
+
+	public JFrame getLauncher() {
+		return launcher;
+	}
+
+	public void setLauncher(JFrame launcher) {
+		this.launcher = launcher;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(nameField.getText().trim().equals("Name...") || nameField.getText().trim().equals("") ){
+			JOptionPane.showMessageDialog(launcher, "Who has ever heard of no one saving the world?");
+		}
+		
+	}
+}
