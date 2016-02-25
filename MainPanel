@@ -1,14 +1,14 @@
 package com.neumont.csc150.TheHouse.view;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,9 +23,11 @@ public class MainPanel extends JPanel implements ActionListener{
 	private JButton newGame;
 	private JButton loadGame;
 	private JButton exitGame;
+	private Frame gameFrame;
 
-	public MainPanel(){
+	public MainPanel(Frame gameFrame){
 		this.setBackground(Color.BLACK);
+		this.gameFrame = gameFrame;
 	}
 	
 	public void initMainPanel(JFrame frame, JPanel panel) {
@@ -36,6 +38,7 @@ public class MainPanel extends JPanel implements ActionListener{
 		launcher = new JFrame("Game Launcher");
 		launchPanel = new JPanel();
 		launchPanel.setBackground(Color.black);
+		launcher.setResizable(false);
 		nameField = new JTextField("Name...");
 		nameField.setHorizontalAlignment(JTextField.CENTER);
 		nameField.addFocusListener(new FocusListener() {
@@ -44,22 +47,15 @@ public class MainPanel extends JPanel implements ActionListener{
 			public void focusGained(FocusEvent arg0) {
 				if(nameField.getText().trim().equals("Name...")){
 					nameField.setText("");
-				}else{
-					
-				}
-				
+				}else{}
 			}
 
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				if(nameField.getText().trim().equals("")){
 					nameField.setText("Name...");
-				}else{
-					
-				}
-				
+				}else{}
 			}
-			
 		});
 		JLabel label = new JLabel("The House"); 
 		newGame = new JButton("New Game");
@@ -87,17 +83,41 @@ public class MainPanel extends JPanel implements ActionListener{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JButton quitter = new JButton();
 				int dialogButton = JOptionPane.YES_NO_OPTION;
 				int choice = JOptionPane.showConfirmDialog(launcher, "Are you sure you wish to quit? Any unsaved progress will be lost.", "Warning!!", dialogButton);
 				if(choice == JOptionPane.YES_OPTION){
 					System.exit(0);
 				}
-				
 			}
-					
 		});
 		
+		loadGame.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				JFrame loadFrame = new JFrame("Load Game");
+				JPanel loadPanel = new JPanel();
+				String userDir = System.getProperty("user.home");
+				JFileChooser loadChooser = new JFileChooser(userDir + "/Desktop");
+				JLabel label = new JLabel("Select your save file...");
+				BoxLayout loadMenu = new BoxLayout(loadPanel, BoxLayout.Y_AXIS);
+				loadFrame.setBackground(Color.BLACK);
+				loadFrame.setResizable(false);
+				loadFrame.setSize(500,  500);
+				launcher.setAlwaysOnTop(false);
+				loadFrame.setAlwaysOnTop(true);
+				loadFrame.setLocationRelativeTo(null);
+				loadFrame.setVisible(true);
+				loadFrame.getContentPane().add(loadPanel);
+				loadPanel.setLayout(loadMenu);
+				loadPanel.add(label);
+				loadPanel.setBackground(Color.BLACK);
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setForeground(Color.WHITE);
+				loadPanel.add(loadChooser);
+				loadPanel.setVisible(true);
+			}
+		});
 	}
 
 	public JFrame getLauncher() {
@@ -111,8 +131,10 @@ public class MainPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(nameField.getText().trim().equals("Name...") || nameField.getText().trim().equals("") ){
-			JOptionPane.showMessageDialog(launcher, "Who has ever heard of no one saving the world?");
+			JOptionPane.showMessageDialog(launcher, "Who has ever heard of \"nobody\" saving the world?");
+		}else{
+			gameFrame.initGameGui();
+			launcher.setVisible(false);
 		}
-		
 	}
 }
