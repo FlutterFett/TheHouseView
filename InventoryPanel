@@ -1,0 +1,27 @@
+package com.neumont.csc150.TheHouse.view;
+
+import java.awt.Color;
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class InventoryPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+
+	private JPanel inventoryPanel;
+	private JFrame mainFrame;
+	
+	public InventoryPanel(JFrame frame){
+		this.setBackground(Color.decode("#41402C"));
+		this.mainFrame = frame;
+		this.initInventoryPanel();
+	}
+	public void initInventoryPanel(){
+		inventoryPanel = new JPanel();
+		inventoryPanel.setVisible(true);
+		GridLayout inventory = new GridLayout(11, 3, 3, 3);
+		inventoryPanel.setLayout(inventory);
+	} 
+}
