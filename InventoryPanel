@@ -3,25 +3,45 @@ package com.neumont.csc150.TheHouse.view;
 import java.awt.Color;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class InventoryPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-
-	private JPanel inventoryPanel;
+	//private JPanel inventoryPanel;
 	private JFrame mainFrame;
-	
+	private JLabel[] labels = new JLabel[33];
+
 	public InventoryPanel(JFrame frame){
 		this.setBackground(Color.decode("#41402C"));
 		this.mainFrame = frame;
-		this.initInventoryPanel();
 	}
+
 	public void initInventoryPanel(){
-		inventoryPanel = new JPanel();
-		inventoryPanel.setVisible(true);
-		GridLayout inventory = new GridLayout(11, 3, 3, 3);
-		inventoryPanel.setLayout(inventory);
+		//inventoryPanel = new JPanel();
+		for(int i = 0; i < labels.length; i++){
+			if(i == 0){
+				labels[i] = new JLabel(" [No Weapon] ");
+			}else if(i == 1){
+				labels[i] = new JLabel(" [No Armor] ");
+			}else if(i == 2){
+				labels[i] = new JLabel(" [No Acc.] ");
+			}else{
+				labels[i] = new JLabel(" [No Item] ");
+			}
+			if(i < 3){
+				labels[i].setForeground(Color.RED);
+			}else{
+				labels[i].setForeground(Color.WHITE);
+				labels[i].setOpaque(true);
+				labels[i].setBackground(Color.BLACK);
+			}
+		}
+		GridLayout inventory = new GridLayout(11, 3, 5, 5);
+		this.setLayout(inventory);
+		for(int i = 0; i < labels.length; i++){
+			this.add(labels[i]);
+		}
 	} 
 }
