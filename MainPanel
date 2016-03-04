@@ -92,6 +92,7 @@ public class MainPanel extends JPanel implements ActionListener{
 				}
 			}
 		});
+		
 		loadGame.addActionListener(new ActionListener(){
 
 			@Override
@@ -143,7 +144,7 @@ public class MainPanel extends JPanel implements ActionListener{
 			launcher.setVisible(false);
 		}
 	}
-
+	
 	public String getCharName() {
 		return charName;
 	}
