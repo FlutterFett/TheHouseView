@@ -19,7 +19,6 @@ public class InventoryPanel extends JPanel {
 	}
 
 	public void initInventoryPanel(){
-		//inventoryPanel = new JPanel();
 		for(int i = 0; i < labels.length; i++){
 			if(i == 0){
 				labels[i] = new JLabel(" [No Weapon] ");
@@ -34,9 +33,12 @@ public class InventoryPanel extends JPanel {
 				labels[i].setForeground(Color.RED);
 			}else{
 				labels[i].setForeground(Color.WHITE);
+				labels[i].setOpaque(true);
+				labels[i].setBackground(Color.BLACK);
 			}
+			labels[i].setHorizontalAlignment(JLabel.CENTER);
 		}
-		GridLayout inventory = new GridLayout(11, 3, 3, 3);
+		GridLayout inventory = new GridLayout(11, 3, 5, 5);
 		this.setLayout(inventory);
 		for(int i = 0; i < labels.length; i++){
 			this.add(labels[i]);
