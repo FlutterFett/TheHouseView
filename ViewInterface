@@ -1,1 +1,6 @@
+package com.neumont.csc150.TheHouse.view;
+
+public interface ViewInterface {
+	public void errorMessage(String message);
+}
 
