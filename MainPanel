@@ -153,4 +153,3 @@ public class MainPanel extends JPanel implements ActionListener{
 		this.charName = charName;
 	}
 
-}
