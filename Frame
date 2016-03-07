@@ -1,13 +1,12 @@
 package com.neumont.csc150.TheHouse.view;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.io.IOException;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
-public class Frame extends JFrame {
+public class Frame extends JFrame implements ViewInterface{
 	private static final long serialVersionUID = 1L;
 	private MainPanel mainPanel;
 	//private JFrame frame;
@@ -33,9 +32,15 @@ public class Frame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().add(gamePanel, BorderLayout.CENTER);
 		this.getContentPane().add(invPanel, BorderLayout.EAST);
-		this.setSize(1000, 800);
+		this.setSize(1065, 1040);
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		invPanel.repaint();
+	}
+
+	@Override
+	public void errorMessage(String message) {
+		JOptionPane.showMessageDialog(this, message, "ERROR", JOptionPane.ERROR_MESSAGE);
 	}
 }
