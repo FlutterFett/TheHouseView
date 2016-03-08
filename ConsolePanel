@@ -1,1 +1,52 @@
+package com.neumont.csc150.TheHouse.view;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class ConsolePanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+	private JFrame mainFrame;
+	private JLabel[] lab = new JLabel[7];
+	//Variable for entities and damage/attack values
+	
+	public ConsolePanel(JFrame mainFrame) {
+		this.mainFrame = mainFrame;
+		//might end up taking the controller interface as a param
+	}
+	
+	public void initConsole(){
+		this.setPreferredSize(new Dimension(840, 200));
+		this.setBackground(Color.decode("#41402C"));
+		BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS);
+		this.setLayout(box);
+		
+		for(int i = 0; i < lab.length; i++){
+			lab[i] = new JLabel();
+			lab[i].setForeground(Color.WHITE);
+			lab[i].setFont(new Font("Sans-Serif", Font.PLAIN, 20));
+			lab[i].setAlignmentX(LEFT_ALIGNMENT);
+		}
+		lab[0].setText("Welcome to \"That's The Name of The Game: THE GAME!\"");
+		this.add(lab[0], 0);
+	}
+	
+	public void setLabel(){
+		int i = 1;
+		//probably would take the entities and shit as a parameter
+		//Blank template Label below
+		lab[i].setText(ENTITY + " did " + DAMAGE + " damage to " + ENTITY);
+		this.add(lab[i], 0);
+		if(i < lab.length){
+			i++;
+		}else{
+			i = 0;
+		}
+	}
+
+}
