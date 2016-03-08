@@ -1,1 +1,76 @@
+package com.neumont.csc150.TheHouse.view;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import com.neumont.csc150.controller.ControllerInterface;
+
+public class LocalePanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+	private JFrame mainFrame;
+	private ControllerInterface master;
+	private String biome = "Biome";
+	private int room = 999;
+	private JLabel biomeLab, roomLab;
+	private int health = 999;
+	private int healthMax = 999;
+	private int atk = 999;
+	private int def = 999;
+	private int spd = 999;
+	private JLabel healthLab, statsLab, blank;
+
+	public LocalePanel(JFrame mainFrame, ControllerInterface master) {
+		this.mainFrame = mainFrame;
+		this.master = master;
+		//this.biome = master.getBiomeName();
+		//this.room = master.getRoomNumber();
+		//this.health = get health from player entity
+		//this.healthMax = get from player entity
+		//this.atk = get from player entity
+		//this.def = get from player entity
+		//this.spd = get from player entity
+	}
+	
+	public void initLocalePanel(){
+		BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS);
+		this.setLayout(box);
+		blank = new JLabel("-----------------------");
+		blank.setForeground(Color.WHITE);
+		blank.setAlignmentX(CENTER_ALIGNMENT);
+		blank.setFont(new Font("Sans-Serif", Font.PLAIN, 20));
+		biomeLab = new JLabel(biome);
+		biomeLab.setForeground(Color.WHITE);
+		biomeLab.setFont(new Font("Sans-Serif", Font.PLAIN, 20));
+		biomeLab.setAlignmentX(CENTER_ALIGNMENT);
+		roomLab = new JLabel("Room:"+room);
+		roomLab.setForeground(Color.WHITE);
+		roomLab.setFont(new Font("Sans-Serif", Font.PLAIN, 20));
+		roomLab.setAlignmentX(CENTER_ALIGNMENT);
+		healthLab = new JLabel("HP:"+health+"/"+healthMax);
+		healthLab.setForeground(Color.WHITE);
+		healthLab.setFont(new Font("Sans-Serif", Font.PLAIN, 20));
+		healthLab.setAlignmentX(CENTER_ALIGNMENT);
+		statsLab = new JLabel("Atk:"+atk+" Def:"+def+" Spd:"+spd);
+		statsLab.setForeground(Color.WHITE);
+		statsLab.setFont(new Font("Sans-Serif", Font.PLAIN, 20));
+		statsLab.setAlignmentX(CENTER_ALIGNMENT);
+		this.setPreferredSize(new Dimension(290, 200));
+		this.setBackground(Color.decode("#41402C"));
+		this.add(biomeLab);
+		this.add(roomLab);
+		this.add(blank);
+		this.add(healthLab);
+		this.add(statsLab);
+		this.setVisible(true);
+	}
+	
+	
+}
